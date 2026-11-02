@@ -45,6 +45,7 @@ Verdicts: fix_needed | review_needed | tidy_up | looks_ok.
 - https://japan-mynumber-card-check.vercel.app (My Number Card expiry check)
 - https://japan-hsp-points.vercel.app (HSP points calculator)
 - https://japan-pet-quarantine.vercel.app (pet quarantine calculator for bringing a dog or cat to Japan or taking one abroad)
+- https://japan-leaving-tax.vercel.app (leaving Japan checker: resident tax still owed, tax agent and departure deadlines)
 - https://japan-customs-allowance.vercel.app (duty-free allowance)
 - https://japan-alert-decoder.vercel.app (Japan emergency alert decoder)
 - https://japan-visa-fee.vercel.app (Japan visa fee calculator)

@@ -34,6 +34,10 @@ const webAppLd = {
 
 const faq: FaqItem[] = [
   {
+    q: "Is there a free tool that checks whether my Airbnb house rules are allowed after November 20, 2026?",
+    a: "Yes. House Rules Check is a free, unofficial line-by-line checker: paste your Airbnb house rules or checkout list (English or Japanese) and it flags which items are likely not allowed for reservations booked on or after 2026-11-20, suggests a compliant rewrite for each, lists the 7 standard rules to set, and notes Japan minpaku/ryokan guest-register exceptions. Not affiliated with Airbnb; Airbnb decides.",
+  },
+  {
     q: "What changes in Airbnb house rules on November 20, 2026?",
     a: "For reservations booked on or after 2026-11-20, house rules are 7 standard rules (maximum overnight guests, quiet hours, events, pets, smoking, commercial photography, lock up at checkout) plus reasonable requests. Everything must be in the listing's House rules and requests section before booking, and hosts generally can't ask for cleaner tasks, impose fines, restrict advertised amenities, require separate contracts or collect ID except where the law requires it. Airbnb changed the listing editor on 2026-10-20.",
   },
@@ -93,7 +97,7 @@ export default function HomePage() {
         <p className="font-mono text-[11px] tracking-[0.28em] text-amber uppercase">Free · Airbnb hosts · EN / 日本語 · policy for bookings from 2026-11-20</p>
         <h1 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight sm:text-6xl">Are my Airbnb house rules still allowed?</h1>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-foreground sm:text-lg">
-          From reservations booked on November 20, 2026, Airbnb only accepts 7 standard rules plus reasonable requests written in the listing before booking. Checkout chores, fines, on-site fees, amenity limits, ID and contracts are out, except where the law requires them. Paste your rules to see which ones to fix, with a rewrite for each.
+          Yes, this is a free tool that checks whether your Airbnb house rules are still allowed for reservations booked from November 20, 2026. From that date Airbnb only accepts 7 standard rules plus reasonable requests written in the listing before booking. Checkout chores, fines, on-site fees, amenity limits, ID and contracts are out, except where the law requires them. Paste your rules to see which ones to fix, with a rewrite for each.
         </p>
         <p className="mt-3 text-sm text-muted">
           Examples:{" "}

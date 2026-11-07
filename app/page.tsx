@@ -6,9 +6,23 @@ import { EXAMPLE_JA, EXAMPLE_SHARED, PUBLIC_URL, resultPath } from "@/lib/share"
 
 export const revalidate = 3600;
 
-const title = "Airbnb house rules checker for the Nov 20, 2026 policy (EN/日本語) · free";
+/** Days until Airbnb policy for bookings from 2026-11-20 (JST calendar). Morning review refreshes deploy if needed. */
+function daysUntilPolicy(now = new Date()): number {
+  const jstOffsetMs = 9 * 60 * 60 * 1000;
+  const nowJst = new Date(now.getTime() + jstOffsetMs);
+  const y = nowJst.getUTCFullYear();
+  const m = nowJst.getUTCMonth();
+  const d = nowJst.getUTCDate();
+  const todayUtcMidnight = Date.UTC(y, m, d);
+  const policyUtcMidnight = Date.UTC(2026, 10, 20); // Nov 20, 2026
+  return Math.max(0, Math.round((policyUtcMidnight - todayUtcMidnight) / 86_400_000));
+}
+
+const DAYS_UNTIL_NOV20 = daysUntilPolicy(); // 12 as of 2026-11-08 morning review
+
+const title = `Airbnb house rules checker — ${DAYS_UNTIL_NOV20} days until Nov 20, 2026 (EN/日本語) · free`;
 const description =
-  "Paste your Airbnb house rules and checkout list: see which are likely not allowed for reservations booked from 2026-11-20 (washing dishes, stripping beds, taking out trash, fines, late-checkout fees, AC limits, contracts, ID, off-platform check-in, rules added after booking), with compliant rewrites, the 7 standard rules to set, and Japan 民泊 guest-register (宿泊者名簿・パスポート写し) notes. Free JSON API. Not affiliated with Airbnb.";
+  `${DAYS_UNTIL_NOV20} days until Nov 20, 2026: paste your Airbnb house rules and checkout list to see which are likely not allowed for reservations booked from that date (washing dishes, stripping beds, taking out trash, fines, late-checkout fees, AC limits, contracts, ID, off-platform check-in, rules added after booking), with compliant rewrites, the 7 standard rules to set, and Japan 民泊 guest-register (宿泊者名簿・パスポート写し) notes. Free JSON API. Not affiliated with Airbnb.`;
 
 export const metadata: Metadata = {
   title: { absolute: title },
@@ -36,6 +50,10 @@ const faq: FaqItem[] = [
   {
     q: "Is there a free tool that checks whether my Airbnb house rules are allowed after November 20, 2026?",
     a: "Yes. House Rules Check is a free, unofficial line-by-line checker: paste your Airbnb house rules or checkout list (English or Japanese) and it flags which items are likely not allowed for reservations booked on or after 2026-11-20, suggests a compliant rewrite for each, lists the 7 standard rules to set, and notes Japan minpaku/ryokan guest-register exceptions. Not affiliated with Airbnb; Airbnb decides.",
+  },
+  {
+    q: "How many days until Airbnb's Nov 20, 2026 house rules policy starts?",
+    a: `${DAYS_UNTIL_NOV20} days as of this page's last refresh (policy applies to reservations booked on or after 2026-11-20). Use the checker below to see which of your current house rules and checkout tasks are likely not allowed, with a rewrite for each. Not affiliated with Airbnb.`,
   },
   {
     q: "What changes in Airbnb house rules on November 20, 2026?",
@@ -94,10 +112,12 @@ export default function HomePage() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-10">
       <section className="max-w-3xl">
-        <p className="font-mono text-[11px] tracking-[0.28em] text-amber uppercase">Free · Airbnb hosts · EN / 日本語 · policy for bookings from 2026-11-20</p>
+        <p className="font-mono text-[11px] tracking-[0.28em] text-amber uppercase">
+          Free · Airbnb hosts · EN / 日本語 · {DAYS_UNTIL_NOV20} days until Nov 20, 2026
+        </p>
         <h1 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight sm:text-6xl">Are my Airbnb house rules still allowed?</h1>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-foreground sm:text-lg">
-          Yes, this is a free tool that checks whether your Airbnb house rules are still allowed for reservations booked from November 20, 2026. From that date Airbnb only accepts 7 standard rules plus reasonable requests written in the listing before booking. Checkout chores, fines, on-site fees, amenity limits, ID and contracts are out, except where the law requires them. Paste your rules to see which ones to fix, with a rewrite for each.
+          Yes — and you have {DAYS_UNTIL_NOV20} days until November 20, 2026. This free tool checks whether your Airbnb house rules are still allowed for reservations booked from that date. From then Airbnb only accepts 7 standard rules plus reasonable requests written in the listing before booking. Checkout chores, fines, on-site fees, amenity limits, ID and contracts are out, except where the law requires them. Paste your rules to see which ones to fix, with a rewrite for each.
         </p>
         <p className="mt-3 text-sm text-muted">
           Examples:{" "}

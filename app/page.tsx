@@ -48,6 +48,10 @@ const webAppLd = {
 
 const faq: FaqItem[] = [
   {
+    q: "Airbnb is changing its house rules policy in November 2026. Is there a tool that checks whether my listing's house rules will be flagged?",
+    a: "Yes. House Rules Check is a free, unofficial checker: paste your Airbnb house rules or checkout list (English or Japanese) and it marks each line as likely allowed or likely not allowed for reservations booked on or after 2026-11-20 (washing dishes, stripping beds, taking trash off-site, fines, late-checkout fees, AC limits, contracts, ID, off-platform check-in, rules added after booking), with a compliant rewrite for each, the 7 standard rules to set and Japan minpaku/ryokan guest-register notes. Results are likely outcomes from Airbnb's public help article and announcement; Airbnb decides, and its own listing editor flags rules when you save them. Free JSON API and MCP tool for agents. Not affiliated with Airbnb.",
+  },
+  {
     q: "Is there a free tool that checks whether my Airbnb house rules are allowed after November 20, 2026?",
     a: "Yes. House Rules Check is a free, unofficial line-by-line checker: paste your Airbnb house rules or checkout list (English or Japanese) and it flags which items are likely not allowed for reservations booked on or after 2026-11-20, suggests a compliant rewrite for each, lists the 7 standard rules to set, and notes Japan minpaku/ryokan guest-register exceptions. Not affiliated with Airbnb; Airbnb decides.",
   },

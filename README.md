@@ -2,7 +2,8 @@
 
 Free line-by-line checker for short-term-rental house rules under Airbnb's house rules policy for reservations booked on or after 2026-11-20. Paste your rules (English or Japanese) and see which are likely not allowed (washing/putting away dishes, stripping beds, laundry, taking trash off-site, fines and penalties, mandatory on-site fees, restricting advertised amenities, separate contracts, ID/personal info, off-platform check-in, rules added after booking by message or sign), which belong in the 7 standard rules or other sections, and a compliant rewrite for each. Japan mode adds the legal guest-register exception (住宅宿泊事業法 art. 8 / 旅館業法 art. 6: passport number and copy for foreign guests without a Japan address), the art. 9 explanation duty and the MLIT minpaku trash rule.
 
-Live: https://house-rules-check.vercel.app
+- Full app and API (Vercel): https://house-rules-check.vercel.app
+- Checker (GitHub Pages): https://akiba-labs.github.io/house-rules-check/
 
 - API: `GET /api/check?text=Please%20wash%20the%20dishes.%0ANo%20smoking` or `POST {"rules":[...],"jurisdiction":"JP","lodging":"minpaku"}` (keyless, CORS), `/api/rules`, `/openapi.json`, `/llms.txt`
 - MCP: `airbnb_house_rules_check` on https://free-agent-tools.vercel.app/mcp
@@ -11,4 +12,15 @@ Sources: Airbnb Help Center article 4168 (EN/JA) and Airbnb Resource Center "Imp
 
 **Disclaimer:** educational keyword check, not legal advice. Not affiliated with, endorsed by or sponsored by Airbnb ("Airbnb" is a trademark of its owner). Findings are likely outcomes; Airbnb's listing editor and support decide.
 
-Dev: `npm ci && npm test && npm run build`
+Dev:
+
+```bash
+npm ci
+npm test
+npm run build
+npm run build:pages
+```
+
+`npm run build` is the Vercel app (checker, JSON API, share pages). `npm run build:pages` writes a static `out/` for GitHub Pages and checks that internal links and assets resolve under `/house-rules-check`. Server routes stay in the repo; the Pages script only moves them aside for that build.
+
+GitHub settings: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Pushes to `main` deploy with `.github/workflows/pages.yml`. Pull requests build the static export and do not deploy. The copy-paste steps for the other tool repos are at the top of `scripts/build-pages.mjs`.

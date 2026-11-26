@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CardDisclaimer } from "@/components/card-disclaimer";
 import { ShareBar } from "@/components/share-bar";
+import { isGithubPages, pagesSiteUrl } from "@/lib/hosting";
 import { CHANNELS, LODGING, type Channel, type Finding, type Jurisdiction, type Lodging } from "@/lib/rules";
 import { EXAMPLE_SHARED, MAX_SHARE_CHARS, PUBLIC_URL, resultPath, safeCheck, type Shared } from "@/lib/share";
 
@@ -30,7 +31,7 @@ export function Calculator({ initial }: { initial?: Shared }) {
 
   const shared: Shared = { text, jurisdiction, lodging, channel };
   const r = text.trim() ? safeCheck(shared) : null;
-  const shareUrl = `${PUBLIC_URL}${resultPath(shared)}`;
+  const shareUrl = isGithubPages ? `${pagesSiteUrl(PUBLIC_URL)}/` : `${PUBLIC_URL}${resultPath(shared)}`;
   const shareable = text.length <= MAX_SHARE_CHARS;
 
   return (
@@ -119,7 +120,12 @@ export function Calculator({ initial }: { initial?: Shared }) {
               ) : null}
               <div className="mt-6">
                 {shareable ? (
-                  <ShareBar url={shareUrl} text={`My Airbnb house rules check → ${r.verdictLabel}: ${r.headline}`} />
+                  <>
+                    {isGithubPages ? (
+                      <p className="mb-3 text-xs text-muted">Share the checker. A link to this exact result returns when hosting is back.</p>
+                    ) : null}
+                    <ShareBar url={shareUrl} text={`My Airbnb house rules check → ${r.verdictLabel}: ${r.headline}`} />
+                  </>
                 ) : (
                   <p className="text-xs text-muted">Too long to share as a link (max {MAX_SHARE_CHARS} characters).</p>
                 )}
